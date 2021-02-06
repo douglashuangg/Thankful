@@ -5,6 +5,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def landingpage():
+
     #FOR QUOTES
     base_url = "https://goquotes-api.herokuapp.com/api/v1/"
     testing_response = requests.get(base_url + "/all/quotes").json()
@@ -15,6 +16,8 @@ def landingpage():
     test2 = random.choice(quote_names)
 
     return render_template('homepage.html', test_author = test1, test2 = test2)
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)

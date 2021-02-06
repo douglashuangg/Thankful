@@ -1,0 +1,12 @@
+
+
+.error {
+    color: red;
+  }
+.error--hidden {
+    display:none;
+}
+
+.login {
+    margin-top: 50px;
+}

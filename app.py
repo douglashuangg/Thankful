@@ -19,7 +19,7 @@ def login_required(f):
         if "logged_in" in session:
             return f(*args, **kwargs)
         else:
-            return redirect("/")
+            return redirect("/sendinfo")
 
     return wrap
 
@@ -61,6 +61,8 @@ def dashboard():
     if db.posts.find_one({"account": name}):
         log = db.posts.find_one({"account": name})["posts"]
         logdates = db.posts.find_one({"account": name})["dates"]
+        log.reverse()
+        logdates.reverse()
         return render_template("dashboard.html", log=log, day=logdates)
     return render_template("dashboard.html")
 
@@ -79,9 +81,7 @@ def usersubmitdata():
         db.posts.insert_one(content)
         db.posts.update_one({"account": name}, {"$push": {"posts": data}})
         db.posts.update_one({"account": name}, {"$push": {"dates": day}})
-    log = db.posts.find_one({"account": name})
-    print(log["posts"])
-    return redirect("/dashboard")
+    return redirect("/dashboard/")
 
 
 if __name__ == "__main__":

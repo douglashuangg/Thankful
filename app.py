@@ -1,7 +1,11 @@
+
 from flask import Flask, render_template, request, redirect, session
 import user.models
+import requests, json, random
 from functools import wraps
 import pymongo
+from quotes import quote_api
+
 
 app = Flask(__name__)
 app.secret_key = "verysecret123"
@@ -16,13 +20,12 @@ def login_required(f):
             return f(*args, **kwargs)
         else:
             return redirect("/")
-
     return wrap
 
 
 @app.route("/")
 def landingpage():
-    return render_template("homepage.html")
+    return render_template("homepage.html", test1=quote_api()[0], test2=quote_api()[1])
 
 
 @app.route("/login/")
@@ -54,6 +57,7 @@ def register():
 @login_required
 def dashboard():
     return render_template("dashboard.html")
+
 
 
 if __name__ == "__main__":

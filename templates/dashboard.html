@@ -20,12 +20,12 @@
     <a href="/user/signout/">LOGOUT</a>
     <div>
 
-        {% for i in day %}
-        <div>{{i}}</div>
-        {% endfor %}
-        {% for i in log %}
-        <div>{{i}}</div>
-        {% endfor %}
+        {% for i in day %}{% for a in log %}
+        <div>On {{i}}, I was thankful for {{a}}</div>
+        {% endfor %}{% endfor %}
+
+
+
     </div>
     <script src="/static/js/log.ks"></script>
     <script src="/static/js/jquery.js"></script>

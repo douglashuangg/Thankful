@@ -1,21 +1,14 @@
 from flask import Flask, render_template, request, redirect
 import requests, json, random
+from quotes.py import test1, test2
 
 app = Flask(__name__)
 
 @app.route('/')
 def landingpage():
 
-    #FOR QUOTES
-    base_url = "https://goquotes-api.herokuapp.com/api/v1/"
-    testing_response = requests.get(base_url + "/all/quotes").json()
-    quotes_list = testing_response['quotes']
-    authors = [name['author'] for name in quotes_list]
-    quote_names = [name['text'] for name in quotes_list]
-    test1 = random.choice(authors)
-    test2 = random.choice(quote_names)
+    return render_template('homepage.html', test1 = test1, test2 = test2)
 
-    return render_template('homepage.html', test_author = test1, test2 = test2)
 
 
 

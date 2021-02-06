@@ -1,4 +1,3 @@
-
 from flask import Flask, render_template, request, redirect, session
 import user.models
 import requests, json, random
@@ -12,6 +11,7 @@ app.secret_key = "verysecret123"
 # database
 client = pymongo.MongoClient("127.0.0.1", 27017)
 db = client.user_login_system
+col = db["journal"]
 # decorators
 def login_required(f):
     @wraps(f)
@@ -20,6 +20,7 @@ def login_required(f):
             return f(*args, **kwargs)
         else:
             return redirect("/")
+
     return wrap
 
 
@@ -58,6 +59,20 @@ def register():
 def dashboard():
     return render_template("dashboard.html")
 
+
+@app.route("/submitdata/", methods=["POST", "GET"])
+@login_required
+def usersubmitdata():
+    data = "ORANGE JUICE"
+    name = session["user"]["email"]
+    content = {"account": name, "posts": []}
+    if db.posts.find_one({"account": name}):
+        db.posts.update_one({"account": name}, {"$push": {"posts": data}})
+    else:
+        db.posts.insert_one(content)
+        db.posts.update_one({"account": name}, {"$push": {"posts": data}})
+
+    return name
 
 
 if __name__ == "__main__":

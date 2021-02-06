@@ -20,9 +20,9 @@
     <a href="/user/signout/">LOGOUT</a>
     <div>
 
-        {% for i in day %}{% for a in log %}
-        <div>On {{i}}, I was thankful for {{a}}</div>
-        {% endfor %}{% endfor %}
+        {% for i in day %}
+        <div>On {{i}}, I was thankful for {{log[loop.index0]}}</div>
+        {% endfor %}
 
 
 

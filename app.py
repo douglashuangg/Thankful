@@ -57,7 +57,9 @@ def register():
 @app.route("/dashboard/")
 @login_required
 def dashboard():
-    return render_template("dashboard.html")
+    name = session["user"]["email"]
+    log = db.posts.find_one({"account": name})["posts"]
+    return render_template("dashboard.html", log=log)
 
 
 @app.route("/submitdata/", methods=["POST", "GET"])
@@ -71,8 +73,9 @@ def usersubmitdata():
     else:
         db.posts.insert_one(content)
         db.posts.update_one({"account": name}, {"$push": {"posts": data}})
-
-    return name
+    log = db.posts.find_one({"account": name})
+    print(log["posts"])
+    return redirect("/dashboard/")
 
 
 if __name__ == "__main__":

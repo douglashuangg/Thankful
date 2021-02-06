@@ -16,6 +16,10 @@
         <label for="entry">Today I am thankful for...</label>
         <input type="text" name="entry">
         <input type="submit" value='Submit' class='btn'>
+
+        {% for i in log %}
+        <div>{{i}}</div>
+        {% endfor %}
     </form>
     <a href="/user/signout/">LOGOUT</a>
     <script src="/static/js/jquery.js"></script>

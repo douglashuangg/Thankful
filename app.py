@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, session
+from flask import Flask, render_template, request, redirect, session, jsonify
 import user.models
 import requests, json, random
 from functools import wraps
@@ -65,10 +65,10 @@ def dashboard():
     return render_template("dashboard.html")
 
 
-@app.route("/submitdata/", methods=["POST", "GET"])
+@app.route("/submitdata", methods=["POST", "GET"])
 @login_required
 def usersubmitdata():
-    data = "ORANGE JUICE"
+    data = request.form.get("entry")
     name = session["user"]["email"]
     day = date.today().strftime("%B %d, %Y")
     content = {"account": name, "posts": [], "dates": []}
@@ -81,7 +81,7 @@ def usersubmitdata():
         db.posts.update_one({"account": name}, {"$push": {"dates": day}})
     log = db.posts.find_one({"account": name})
     print(log["posts"])
-    return redirect("/dashboard/")
+    return redirect("/dashboard")
 
 
 if __name__ == "__main__":

@@ -4,7 +4,7 @@ import requests, json, random
 from functools import wraps
 import pymongo
 from quotes import quote_api
-
+from datetime import date
 
 app = Flask(__name__)
 app.secret_key = "verysecret123"
@@ -60,7 +60,8 @@ def dashboard():
     name = session["user"]["email"]
     if db.posts.find_one({"account": name}):
         log = db.posts.find_one({"account": name})["posts"]
-        return render_template("dashboard.html", log=log)
+        logdates = db.posts.find_one({"account": name})["dates"]
+        return render_template("dashboard.html", log=log, day=logdates)
     return render_template("dashboard.html")
 
 
@@ -69,12 +70,15 @@ def dashboard():
 def usersubmitdata():
     data = "ORANGE JUICE"
     name = session["user"]["email"]
-    content = {"account": name, "posts": []}
+    day = date.today().strftime("%B %d, %Y")
+    content = {"account": name, "posts": [], "dates": []}
     if db.posts.find_one({"account": name}):
         db.posts.update_one({"account": name}, {"$push": {"posts": data}})
+        db.posts.update_one({"account": name}, {"$push": {"dates": day}})
     else:
         db.posts.insert_one(content)
         db.posts.update_one({"account": name}, {"$push": {"posts": data}})
+        db.posts.update_one({"account": name}, {"$push": {"dates": day}})
     log = db.posts.find_one({"account": name})
     print(log["posts"])
     return redirect("/dashboard/")

@@ -19,7 +19,9 @@
     </form>
     <a href="/user/signout/">LOGOUT</a>
 
-
+    {% for i in day %}
+    <div>{{i}}</div>
+    {% endfor %}
     {% for i in log %}
     <div>{{i}}</div>
     {% endfor %}

@@ -5,6 +5,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def landingpage():
+    #FOR QUOTES
     base_url = "https://goquotes-api.herokuapp.com/api/v1/"
     testing_response = requests.get(base_url + "/all/quotes").json()
     quotes_list = testing_response['quotes']

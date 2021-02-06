@@ -1,17 +1,17 @@
-
-from flask import Flask, render_template, request, redirect, session
+from flask import Flask, render_template, request, redirect, session, jsonify
 import user.models
 import requests, json, random
 from functools import wraps
 import pymongo
 from quotes import quote_api
-
+from datetime import date
 
 app = Flask(__name__)
 app.secret_key = "verysecret123"
 # database
 client = pymongo.MongoClient("127.0.0.1", 27017)
 db = client.user_login_system
+col = db["journal"]
 # decorators
 def login_required(f):
     @wraps(f)
@@ -20,6 +20,7 @@ def login_required(f):
             return f(*args, **kwargs)
         else:
             return redirect("/")
+
     return wrap
 
 
@@ -56,8 +57,31 @@ def register():
 @app.route("/dashboard/")
 @login_required
 def dashboard():
+    name = session["user"]["email"]
+    if db.posts.find_one({"account": name}):
+        log = db.posts.find_one({"account": name})["posts"]
+        logdates = db.posts.find_one({"account": name})["dates"]
+        return render_template("dashboard.html", log=log, day=logdates)
     return render_template("dashboard.html")
 
+
+@app.route("/submitdata", methods=["POST", "GET"])
+@login_required
+def usersubmitdata():
+    data = request.form.get("entry")
+    name = session["user"]["email"]
+    day = date.today().strftime("%B %d, %Y")
+    content = {"account": name, "posts": [], "dates": []}
+    if db.posts.find_one({"account": name}):
+        db.posts.update_one({"account": name}, {"$push": {"posts": data}})
+        db.posts.update_one({"account": name}, {"$push": {"dates": day}})
+    else:
+        db.posts.insert_one(content)
+        db.posts.update_one({"account": name}, {"$push": {"posts": data}})
+        db.posts.update_one({"account": name}, {"$push": {"dates": day}})
+    log = db.posts.find_one({"account": name})
+    print(log["posts"])
+    return redirect("/dashboard")
 
 
 if __name__ == "__main__":

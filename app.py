@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect
-from user.models import User
+import user.models
 import pymongo
 
 app = Flask(__name__)
@@ -21,7 +21,7 @@ def login():
 
 @app.route("/user/signup", methods=["POST"])
 def signup():
-    return User().signup()
+    return user.models.User().signup()
 
 
 @app.route("/sendinfo")

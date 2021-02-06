@@ -1,15 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+{% block head %}
+<title> Landing Page </title>
 
-<body>
-    WELCOME TO [NAME OF SITE]
-</body>
+{% endblock %}
 
-</html>
+{% block body %}
+
+<h1> Quotes</h1>
+{{ test2 }}
+{{ test1 }}
+
+{% endblock %}
+

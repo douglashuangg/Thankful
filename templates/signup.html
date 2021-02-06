@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIGNUP</title>
+    <link rel="stylesheet" href="/static/css/signup.css">
+</head>
+
+<body>
+    <h1>Create an account!</h1>
+
+    <form name='signup_form'>
+        <label for="name">NAME</label>
+        <input type="text" name='name' required>
+        <label for="email">EMAIL</label>
+        <input type="email" name='email' required>
+        <label for="password">PW</label>
+        <input type="password" name='password' required>
+        <p class='error error--hidden'>Sign up could not be created</p>
+
+        <input type="submit" value='Sign Up' class='btn'>
+    </form>
+    <h1>Log In</h1>
+    <div class='login'>
+        <form name='login_form'>
+            <label for="email">EMAIL</label>
+            <input type="email" name='email' required>
+            <label for="password">PW</label>
+            <input type="password" name='password' required>
+            <p class='error error--hidden'>Invalid log in credentials</p>
+
+            <input type="submit" value='Log In' class='btn'>
+        </form>
+    </div>
+    <script src="/static/js/jquery.js"></script>
+    <script src="/static/js/scripts.js"></script>
+</body>
+
+</html>

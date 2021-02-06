@@ -58,8 +58,10 @@ def register():
 @login_required
 def dashboard():
     name = session["user"]["email"]
-    log = db.posts.find_one({"account": name})["posts"]
-    return render_template("dashboard.html", log=log)
+    if db.posts.find_one({"account": name}):
+        log = db.posts.find_one({"account": name})["posts"]
+        return render_template("dashboard.html", log=log)
+    return render_template("dashboard.html")
 
 
 @app.route("/submitdata/", methods=["POST", "GET"])

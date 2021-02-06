@@ -16,12 +16,14 @@
         <label for="entry">Today I am thankful for...</label>
         <input type="text" name="entry">
         <input type="submit" value='Submit' class='btn'>
-
-        {% for i in log %}
-        <div>{{i}}</div>
-        {% endfor %}
     </form>
     <a href="/user/signout/">LOGOUT</a>
+
+
+    {% for i in log %}
+    <div>{{i}}</div>
+    {% endfor %}
+
     <script src="/static/js/jquery.js"></script>
     <script src="/static/js/scripts.js"></script>
 </body>

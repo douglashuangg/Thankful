@@ -6,101 +6,116 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <!--link rel="stylesheet" href="/static/css/homepage.css"-->
+    <!-- <link rel="stylesheet" href="/static/css/homepage.css"> -->
     <style>
-    .bg-1 {
-        background-color: rgba(255, 255, 255, 0.9); /* Green */
-        color: #000000;
-        height: 200px; 
-        font-size: 100%;
-    }
-    .bg-2{
-      
-        background-size: 100% 100%;
-        font-size: 200%;
-        height: 100%;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-image: url(https://t3.ftcdn.net/jpg/03/16/90/08/360_F_316900812_fpH4uGhkwIahfFU1cEWNz5uXlfwsToFy.jpg)
-    }
-    body, html{
-        height:100%
-    }
+        .bg-1 {
+            background-color: #faf4ff;
+            /* Green */
+            color: #000000;
+            height: 200px;
+            font-size: 100%;
+            border-radius: 6px;
+        }
 
-    span:before{
-        content: 'Welcome!';
-        animation: animate infinite 15s;
-    }
-    @keyframes animate{
-        10%
-        {
+        .bg-2 {
+
+            background-size: 100% 100%;
+            font-size: 135%;
+            height: 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-image: url(https://images.unsplash.com/photo-1482686115713-0fbcaced6e28?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1047&q=80)
+        }
+
+        body,
+        html {
+            height: 100%
+        }
+
+        span:before {
             content: 'Welcome!';
+            animation: animate infinite 15s;
         }
-        25%
-        {
-            content: 'Bienvenue!';
-        }
-        50%
-        {
-            content: '¡Bienvenido/a';
-        }
-        75%
-        {
-            content: '欢迎!';
-        }
-        100%
-        {
-            content: 'வரவேற்பு!';
-        }
-    }
 
-    .navbar {
-        background-color: #faf4ff;
-    }
+        @keyframes animate {
+            10% {
+                content: 'Welcome!';
+            }
 
-    .navbar-brand{
-        color: #8D86C9;
-    }
+            25% {
+                content: 'Bienvenue!';
+            }
 
-    .navbar-text{
-        color: #8D86C9;
-    }
+            50% {
+                content: '¡Bienvenido/a';
+            }
+
+            75% {
+                content: '欢迎!';
+            }
+
+            100% {
+                content: 'வரவேற்பு!';
+            }
+        }
+
+        .navbar {
+            background-color: #faf4ff;
+        }
+
+        .navbar-brand {
+            color: #8D86C9;
+        }
+
+        .navbar-text {
+            color: #8D86C9;
+        }
+
+        .nav-link {
+            color: #8D86C9;
+        }
     </style>
 </head>
 
 <body>
     <nav class="navbar navbar-default">
         <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand me-0 pe-0" href="/">Thankful</a>
-                <div class="navbar-text">
-                    — journaling for a happier heart
-                </div>
+            <a class="navbar-brand me-0 pe-0" href="/">Thankful — journaling for a happier heart</a>
+
+            <div class="navbar-nav">
+                <a href="/user/signout/" class='nav-link'>logout</a>
             </div>
+
+
         </div>
     </nav>
 
     <div class="container-fluid bg-2 text-center">
         <h1 style="font-size:6vw;"><span></span></h1>
-        <h2 >Is it possible to boost your mood in only a minute? It is now with Thankful! Sign up now to start your gratitude journal.</h2>
+        <p>Is it possible to boost your mood in only a minute? It is now, with Thankful! There are numerous studies
+            which have shown that giving thanks can lower stress, help you sleep better, and may even reduce the risk of
+            heart disease. Sign up now to start your
+            gratitude journal.</p>
         <br>
         <form action="/sendinfo" class="inline">
-            <button class="submit-button btn btn-danger btn-lg" > GET STARTED! </button>
+            <button class="submit-button btn btn-secondary btn-lg"> Get started! </button>
         </form>
         <br>
         <br>
         <!-- quotes -->
-        <div class="container-fluid bg-1 text-center">
-            <h2>Quote of the Day</h2>
-            {{ test2 }}
+        <div class="container-fluid bg-1 text-center align-items-center rounded">
+            <h2>motivational quote of the day</h2>
+            "{{ test2 }}""
             --
-            {{ test1 }}
+            <i>{{ test1 }}</i>
             <div>
-                <button onClick="window.location.reload();" type="button" class="btn btn-danger btn-lg" style="float:right;">Next Quote</button>
+                <button onClick="window.location.reload();" type="button" class="btn btn-secondary btn-lg"
+                    style="float:right;">new quote</button>
             </div>
         </div>
     </div>

@@ -19,7 +19,7 @@ def login_required(f):
         if "logged_in" in session:
             return f(*args, **kwargs)
         else:
-            return redirect("/sendinfo")
+            return redirect("/account")
 
     return wrap
 
@@ -49,7 +49,7 @@ def signout():
     return user.models.User().signout()
 
 
-@app.route("/sendinfo")
+@app.route("/account/")
 def register():
     return render_template("signup.html")
 

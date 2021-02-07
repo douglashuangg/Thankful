@@ -12,8 +12,22 @@
 
     <p>Nice to see you again, {{ session['user']['name'] }}</p>
 
-
+    <form name="submit_entry" action="/submitdata" method='POST'>
+        <label for="entry">Today I am thankful for...</label>
+        <input type="text" name="entry" id='entry'>
+        <input type="submit" value='Submit' class='btn'>
+    </form>
     <a href="/user/signout/">LOGOUT</a>
+    <div>
+
+        {% for i in day %}
+        <div>On {{i}}, I was thankful for {{log[loop.index0]}}</div>
+        {% endfor %}
+
+
+
+    </div>
+    <script src="/static/js/log.ks"></script>
     <script src="/static/js/jquery.js"></script>
     <script src="/static/js/scripts.js"></script>
 </body>

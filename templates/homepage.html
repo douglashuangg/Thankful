@@ -12,53 +12,98 @@
     <!--link rel="stylesheet" href="/static/css/homepage.css"-->
     <style>
     .bg-1 {
-        background-color:#8D86C9; /* Green */
+        background-color: rgba(255, 255, 255, 0.9); /* Green */
         color: #000000;
-        height: 400px;
+        height: 200px; 
+        font-size: 100%;
     }
     .bg-2{
-        height: 700px;
+      
         background-size: 100% 100%;
         font-size: 200%;
+        height: 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
         background-image: url(https://t3.ftcdn.net/jpg/03/16/90/08/360_F_316900812_fpH4uGhkwIahfFU1cEWNz5uXlfwsToFy.jpg)
-        
+    }
+    body, html{
+        height:100%
+    }
+
+    span:before{
+        content: 'Welcome!';
+        animation: animate infinite 15s;
+    }
+    @keyframes animate{
+        10%
+        {
+            content: 'Welcome!';
+        }
+        25%
+        {
+            content: 'Bienvenue!';
+        }
+        50%
+        {
+            content: '¡Bienvenido/a';
+        }
+        75%
+        {
+            content: '欢迎!';
+        }
+        100%
+        {
+            content: 'வரவேற்பு!';
+        }
+    }
+
+    .navbar {
+        background-color: #faf4ff;
+    }
+
+    .navbar-brand{
+        color: #8D86C9;
+    }
+
+    .navbar-text{
+        color: #8D86C9;
     }
     </style>
-
-
 </head>
 
 <body>
-
     <nav class="navbar navbar-default">
         <div class="container-fluid">
-          <div class="navbar-header">
-            <a class="navbar-brand" href="#">THANKFUL</a>
-          </div>
-          <ul class="nav navbar-nav navbar-right">
-            <a href="/sendinfo">click here to make an account</a>
-        </ul>
+            <div class="navbar-header">
+                <a class="navbar-brand me-0 pe-0" href="/">Thankful</a>
+                <div class="navbar-text">
+                    — journaling for a happier heart
+                </div>
+            </div>
         </div>
     </nav>
 
-    <div class="container-fluid bg-1 text-center">
-        
-        <h1>Welcome</h1>
-        <h2>Sign up to start journaling what you are thankful for.</h2>
-      
-
-    </div>
     <div class="container-fluid bg-2 text-center">
-        <h2>Quote of the Day</h2>
-        {{ test2 }}
-        --
-        {{ test1 }}
-        <div>
-            <button onClick="window.location.reload();" type="button" class="btn btn-danger btn-lg" style="float:right;">More</button>
+        <h1 style="font-size:6vw;"><span></span></h1>
+        <h2 >Sign up now to start your gratitude journal</h2>
+        <br>
+        <form action="/sendinfo" class="inline">
+            <button class="submit-button btn btn-danger btn-lg" > GET STARTED! </button>
+        </form>
+        <br>
+        <br>
+        <!-- quotes -->
+        <div class="container-fluid bg-1 text-center">
+            <h2>Quote of the Day</h2>
+            {{ test2 }}
+            --
+            {{ test1 }}
+            <div>
+                <button onClick="window.location.reload();" type="button" class="btn btn-danger btn-lg" style="float:right;">Next Quote</button>
+            </div>
         </div>
     </div>
-
-
 </body>
 
 </html>

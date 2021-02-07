@@ -5,31 +5,61 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello</title>
+    <title>Thankful</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/css/dashboard.css">
 </head>
 
-<body>
+<body class='lmao'>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <a class="navbar-brand me-0 pe-0" href="/">Thankful — journaling for a happier heart</a>
 
-    <p>Nice to see you again, {{ session['user']['name'] }}</p>
-
-    <form name="submit_entry" action="/submitdata" method='POST'>
-        <label for="entry">Today I am thankful for...</label>
-        <input type="text" name="entry" id='entry'>
-        <input type="submit" value='Submit' class='btn'>
-    </form>
-    <a href="/user/signout/">LOGOUT</a>
-    <div>
-
-        {% for i in day %}
-        <div>On {{i}}, I was thankful for {{log[loop.index0]}}</div>
-        {% endfor %}
+            <div class="navbar-nav">
+                <a href="/user/signout/" class='nav-link'>logout</a>
+            </div>
 
 
+        </div>
+    </nav>
+    <div class="container cfirst">
+        <p class='fs-4'>Welcome to your journal, <i>{{ session['user']['name'] }}</i>! Take a few moments to jot down
+            some
+            things you
+            are
+            grateful for.</p>
 
+        <form name="submit_entry" action="/submitdata" method='POST'>
+            <div class="row">
+                <div class="col-3 pe-0">
+                    <label for="entry" class='fs-5'>Today I am thankful for...</label>
+                </div>
+                <div class="col">
+                    <input type="text" name="entry" class='form-control' id='entry' required>
+                </div>
+                <div class="col">
+                    <input type="submit" value='enter' class='btn btn-secondary'>
+                </div>
+            </div>
+        </form>
+
+        <div class='container mt-3'>
+
+            {% for i in day %}
+            <div class='individual'>On {{i}}, I was thankful for {{log[loop.index0]}}</div>
+            {% endfor %}
+
+
+
+        </div>
     </div>
-    <script src="/static/js/log.ks"></script>
+    <script src="/static/js/log.js"></script>
     <script src="/static/js/jquery.js"></script>
     <script src="/static/js/scripts.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>

@@ -26,7 +26,7 @@ def login_required(f):
 
 @app.route("/")
 def landingpage():
-    return render_template("homepage.html", test1=quote_api()[0], test2=quote_api()[1])
+    return render_template("homepage.html", test1=quote_api()[0])
 
 
 @app.route("/login/")
